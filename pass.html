@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passvord</title>
+    <style>
+        :root {
+            --primary: #03DAC6;
+            --secondary: #f8f8f8;
+            --text: #f8f8f8;
+            --background: #121212;
+            --box-background: #1E1E1E;
+        }
+
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            height: 100vh;
+            display: flex;
+            background: var(--background);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            background: var(--box-background);
+            padding: 1.5rem;
+            padding-top: 0.75rem;
+            border-radius: 1rem;
+        }
+
+        .input__wrapper {
+            position: relative;
+            padding: 1rem 0 0;
+        }
+
+        .input__field {
+            border: 0;
+            border-bottom: 2px solid var(--secondary);
+            outline: 0;
+            color: var(--text);
+            padding: 0.25rem 0px;
+            padding-right: 2rem;
+
+            background: transparent;
+            transition: border-color 0.2s;
+        }
+
+        .input__field::placeholder {
+            color: transparent;
+        }
+
+        .input__field:placeholder-shown~.input__label {
+            font-size: 1rem;
+            cursor: text;
+            color: var(--secondary);
+            top: 1.20rem;
+        }
+
+        label,
+        .input__field:focus~.input__label {
+            position: absolute;
+            top: 0;
+            display: block;
+            font-size: 0.875rem;
+            left: -0.0625rem;
+            color: var(--secondary);
+            transition: 0.3s;
+        }
+
+        .input__field:focus~.input__label {
+            color: var(--primary);
+        }
+
+        .input__field:focus {
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .input__icon {
+            position: absolute;
+            right: -0.875rem;
+            bottom: -0.65rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            padding: 0.125;
+            transform: translate(-50%, -50%);
+            transform-origin: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form class="box">
+        <div class="input__wrapper">
+            <input id="password" type="password" class="input__field" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
+                placeholder="Your Password">
+            <label for="password" class="input__label">
+                Password
+            </label>
+            <img alt="Eye Icon" title="Eye Icon"
+                src="https://raw.githubusercontent.com/atherosai/ui/731acd657a469278b84e77f289a7d01cc7d8d924/input-04/assets/eye.svg"
+                class="input__icon">
+        </div>
+    </form>
+
+    <script>
+        const input = document.querySelector(".input__field");
+        const inputIcon = document.querySelector(".input__icon");
+
+        inputIcon.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            inputIcon.setAttribute(
+                'src',
+                input.getAttribute('type') === 'password' ?
+                    'https://raw.githubusercontent.com/atherosai/ui/731acd657a469278b84e77f289a7d01cc7d8d924/input-04/assets/eye-off.svg'
+                    :
+                    'https://raw.githubusercontent.com/atherosai/ui/731acd657a469278b84e77f289a7d01cc7d8d924/input-04/assets/eye.svg'
+            );
+
+            input.setAttribute(
+                'type',
+                input.getAttribute('type') === 'password' ?
+                    'text'
+                    :
+                    'password'
+            );
+        });
+    </script>
+</body>
+
+</html>
