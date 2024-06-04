@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Passvord</title>
+    <title>Password</title>
     <style>
         :root {
             --primary: #03DAC6;
@@ -35,24 +35,22 @@
 
         .box {
             background: var(--box-background);
-            padding: 1.5rem;
-            padding-top: 0.75rem;
+            padding: 1.5rem 1.5rem 0.75rem;
             border-radius: 1rem;
         }
 
         .input__wrapper {
             position: relative;
-            padding: 1rem 0 0;
+            padding-top: 1rem;
         }
 
         .input__field {
+            width: 100%;
             border: 0;
             border-bottom: 2px solid var(--secondary);
             outline: 0;
             color: var(--text);
-            padding: 0.25rem 0px;
-            padding-right: 2rem;
-
+            padding: 0.25rem 0 0.25rem 0;
             background: transparent;
             transition: border-color 0.2s;
         }
@@ -68,13 +66,12 @@
             top: 1.20rem;
         }
 
-        label,
+        .input__label,
         .input__field:focus~.input__label {
             position: absolute;
             top: 0;
-            display: block;
+            left: 0;
             font-size: 0.875rem;
-            left: -0.0625rem;
             color: var(--secondary);
             transition: 0.3s;
         }
@@ -93,50 +90,34 @@
             bottom: -0.65rem;
             width: 1.5rem;
             height: 1.5rem;
-            padding: 0.125;
             transform: translate(-50%, -50%);
-            transform-origin: center;
             cursor: pointer;
         }
     </style>
 </head>
 
 <body>
-
     <form class="box">
         <div class="input__wrapper">
             <input id="password" type="password" class="input__field" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
                 placeholder="Your Password">
-            <label for="password" class="input__label">
-                Password
-            </label>
+            <label for="password" class="input__label">Password</label>
             <img alt="Eye Icon" title="Eye Icon"
                 src="https://raw.githubusercontent.com/atherosai/ui/731acd657a469278b84e77f289a7d01cc7d8d924/input-04/assets/eye.svg"
-                class="input__icon">
+                class="input__icon" id="togglePassword">
         </div>
     </form>
 
     <script>
-        const input = document.querySelector(".input__field");
-        const inputIcon = document.querySelector(".input__icon");
+        document.getElementById("togglePassword").addEventListener("click", function (e) {
+            const passwordInput = document.getElementById("password");
+            const icon = e.target;
+            const isPassword = passwordInput.getAttribute("type") === "password";
 
-        inputIcon.addEventListener("click", (e) => {
-            e.preventDefault();
-
-            inputIcon.setAttribute(
-                'src',
-                input.getAttribute('type') === 'password' ?
-                    'https://raw.githubusercontent.com/atherosai/ui/731acd657a469278b84e77f289a7d01cc7d8d924/input-04/assets/eye-off.svg'
-                    :
-                    'https://raw.githubusercontent.com/atherosai/ui/731acd657a469278b84e77f289a7d01cc7d8d924/input-04/assets/eye.svg'
-            );
-
-            input.setAttribute(
-                'type',
-                input.getAttribute('type') === 'password' ?
-                    'text'
-                    :
-                    'password'
+            passwordInput.setAttribute("type", isPassword ? "text" : "password");
+            icon.setAttribute("src", isPassword
+                ? "https://raw.githubusercontent.com/atherosai/ui/731acd657a469278b84e77f289a7d01cc7d8d924/input-04/assets/eye-off.svg"
+                : "https://raw.githubusercontent.com/atherosai/ui/731acd657a469278b84e77f289a7d01cc7d8d924/input-04/assets/eye.svg"
             );
         });
     </script>
